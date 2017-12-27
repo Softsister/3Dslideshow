@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 560px;
+            height: 300px;
+            position: relative;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        .box .left,
+        .box .right{
+            width: 40px;
+            height: 60px;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            line-height: 60px;
+            color: #fff;
+            position: absolute;
+            top: 120px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .box .left{
+            left: 0;
+        }
+        .box .right{
+            right: 0;
+        }
+        .box ul{
+            width: 100%;
+            height: 100%;
+            list-style: none;
+        }
+        .box ul li{
+            width: 112px;
+            height: 100%;
+            float: left;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .box ul li span{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .box ul li span:nth-child(1){
+            background: url("./images/1.jpg") no-repeat;
+            transform: translateZ(150px);
+        }
+        .box ul li span:nth-child(2){
+            background: url("./images/2.jpg") no-repeat;
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .box ul li span:nth-child(3){
+            background: url("./images/3.jpg") no-repeat;
+            transform: rotateX(180deg) translateZ(150px);
+        }
+        .box ul li span:nth-child(4){
+            background: url("./images/4.jpg") no-repeat;
+            transform: rotateX(270deg) translateZ(150px);
+        }
+
+        .box ul li:nth-child(2) span{
+            background-position: -112px 0;
+        }
+        .box ul li:nth-child(3) span{
+            background-position: -224px 0;
+        }
+        .box ul li:nth-child(4) span{
+            background-position: -336px 0;
+        }
+        .box ul li:nth-child(5) span{
+            background-position: -448px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </li>
+        <li>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </li>
+        <li>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </li>
+        <li>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </li>
+        <li>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </li>
+    </ul>
+    <a href="javascript:;" class="left"><</a>
+    <a href="javascript:;" class="right">></a>
+</div>
+<script src="jquery.min.js"></script>
+<script>
+    var index = 0;
+    var falg = true;
+    $( ".left" ).on( "click", function () {
+        if( !falg ) return;
+        falg = false;
+        index--;
+        var angle = - index * 90;
+        $( ".box ul li" ).css("transform", "rotateX("+ angle +"deg)").each( function (i,item) {
+            $(item).css( "transition", "all 1s linear " + ( i * 0.25 ) +"s");
+        } );
+    } );
+    $( ".right" ).on( "click", function () {
+        if( !falg ) return;
+        falg = false;
+        index++;
+        var angle = - index * 90;
+        $( ".box ul li" ).css("transform", "rotateX("+ angle +"deg)").each( function (i,item) {
+            $(item).css( "transition", "all 1s linear " + ( i * 0.25 ) +"s");
+        } );
+    } );
+    $( ".box ul li:last" ).on( "transitionend", function () {
+            falg = true;
+    } );
+</script>
+</body>
+</html>
